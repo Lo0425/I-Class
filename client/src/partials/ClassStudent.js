@@ -16,21 +16,23 @@ const ClassStudent = () => {
   const [score, setScore] = useState();
 
   const onGetScoreHistory = (e) => {
-    setIsLoading(true);
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_SERVER}/class/getScoreHistory/` + data.classCode, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: e.target.value,
-      }),
-    })
+    fetch(
+      `${process.env.REACT_APP_API_SERVER}/class/getScoreHistory/` +
+        data.classCode,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: e.target.value,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setHistory(data.history.history.reverse());
-        setIsLoading(false);
       });
   };
 
