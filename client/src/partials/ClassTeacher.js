@@ -97,19 +97,22 @@ const ClassTeacher = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    fetch(`${process.env.REACT_APP_API_SERVER}/class/addScore/` + e.target.value, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: e.target.id,
-        title: e.target.name,
-        classCode: data.classCode,
-        date: date,
-        time: time,
-      }),
-    })
+    fetch(
+      `${process.env.REACT_APP_API_SERVER}/class/addScore/` + e.target.value,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: e.target.id,
+          title: e.target.name,
+          classCode: data.classCode,
+          date: date,
+          time: time,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         let type = data.status == 400 ? toast.error : toast.success;
@@ -135,16 +138,20 @@ const ClassTeacher = () => {
       confirmButtonColor: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${process.env.REACT_APP_API_SERVER}/class/delete-skill/` + e.target.id, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": localStorage.getItem("token"),
-          },
-          body: JSON.stringify({
-            classCode: data.classCode,
-          }),
-        })
+        fetch(
+          `${process.env.REACT_APP_API_SERVER}/class/delete-skill/` +
+            e.target.id,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+              classCode: data.classCode,
+            }),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             Swal.fire({
@@ -171,16 +178,19 @@ const ClassTeacher = () => {
         closeOnClick: true,
       });
     } else {
-      fetch(`${process.env.REACT_APP_API_SERVER}/class/add-skill/` + data.classCode, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: name,
-          point: score,
-        }),
-      })
+      fetch(
+        `${process.env.REACT_APP_API_SERVER}/class/add-skill/` + data.classCode,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: name,
+            point: score,
+          }),
+        }
+      )
         .then((res) => {
           getScoreSys();
           return res.json();

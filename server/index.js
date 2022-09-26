@@ -10,10 +10,13 @@ app.use(express.static("public"));
 
 const { PORT, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
-mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
+// mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
+mongoose.connect(
+  "mongodb+srv://LoChiaChing:E!e4e00397@cluster0.jngi1nd.mongodb.net/?retryWrites=true&w=majority"
+);
 
-app.use("/users", require("./routes/users"));
-app.use("/class", require("./routes/class"));
+app.use("/users", require("./api/users"));
+app.use("/class", require("./api/class"));
 
 // app.use("/items", require("./routes/items"));
 // app.use("/carts", require("./routes/carts"));
